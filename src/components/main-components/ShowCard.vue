@@ -10,15 +10,28 @@ export default {
         return "gb";
       } else return string;
     },
+    round(number) {
+      return Math.round(number / 2);
+    },
   },
 };
 </script>
 
 <template>
-  <h1>{{ show.title }}{{ show.name }}</h1>
-  <h2>{{ show.original_title }}{{ show.original_name }}</h2>
-  <span :class="`fi fi-${enFlag(show.original_language)}`"></span>
-  <h4>{{ show.vote_average }}</h4>
+  <div class="card" v-if="show.poster_path">
+    <div class="item">
+      <img
+        :src="`https://image.tmdb.org/t/p/w300/${show.poster_path}`"
+        :alt="(show.title, show.name)"
+      />
+      <h1>{{ show.title }} {{ show.name }}</h1>
+    </div>
+    <div class="on-hover">
+      <h2>{{ show.original_title }} {{ show.original_name }}</h2>
+      <span :class="`fi fi-${enFlag(show.original_language)}`"></span>
+      <h4>{{ round(show.vote_average) }}</h4>
+    </div>
+  </div>
 </template>
 
 <style></style>
