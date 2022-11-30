@@ -12,7 +12,10 @@ export default {
 </script>
 
 <template>
-  <h1>PageHeader</h1>
+  <form @submit.prevent="$emit(`searchFor`)">
+    <input type="text" v-model="store.searchQuery" />
+    <button type="submit">Cerca</button>
+  </form>
 </template>
 
 <style></style>

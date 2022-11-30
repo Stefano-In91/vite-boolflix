@@ -14,14 +14,38 @@ export default {
       store,
     };
   },
+  methods: {
+    searchMovies() {
+      this.store.movies = [];
+      axios
+        .get("https://api.themoviedb.org/3/search/movie", {
+          params: {
+            api_key: "e02ccfdaadf1d52eb482ac6f985a52cd",
+            query: this.store.searchQuery,
+          },
+        })
+        .then((resp) => {
+          this.store.movies = resp.data.results;
+        });
+      this.store.searchQuery = "";
+    },
+    search() {
+      this.searchMovies();
+    },
+    logga() {
+      console.log(this.store.movies);
+    },
+  },
 };
 </script>
 
 <template>
-  <div class="container">
-    <PageHeader />
+  <header>
+    <PageHeader @searchFor="search" />
+  </header>
+  <main @click="logga">
     <PageMain />
-  </div>
+  </main>
 </template>
 
 <style lang="scss">
