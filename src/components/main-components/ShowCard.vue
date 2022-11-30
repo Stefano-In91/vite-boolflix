@@ -24,10 +24,16 @@ export default {
         :src="`https://image.tmdb.org/t/p/w300/${show.poster_path}`"
         :alt="(show.title, show.name)"
       />
-      <h1>{{ show.title }} {{ show.name }}</h1>
+      <h1>{{ show.title }}{{ show.name }}</h1>
     </div>
     <div class="on-hover">
-      <h2>{{ show.original_title }} {{ show.original_name }}</h2>
+      <h2
+        v-if="
+          show.original_title !== show.title || show.name !== show.original_name
+        "
+      >
+        {{ show.original_title }} {{ show.original_name }}
+      </h2>
       <span :class="`fi fi-${enFlag(show.original_language)}`"></span>
       <h4>{{ round(show.vote_average) }}</h4>
     </div>
