@@ -17,8 +17,8 @@ export default {
 
 <template>
   <h1>PageMain</h1>
-  <ShowCard />
-  <ShowCard />
+  <ShowCard v-for="movie in store.movies" :show="movie" />
+  <ShowCard v-for="serie in store.series" :show="serie" />
 </template>
 
 <style></style>

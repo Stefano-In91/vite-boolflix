@@ -21,19 +21,32 @@ export default {
         .get("https://api.themoviedb.org/3/search/movie", {
           params: {
             api_key: "e02ccfdaadf1d52eb482ac6f985a52cd",
+            language: "it-IT",
             query: this.store.searchQuery,
           },
         })
         .then((resp) => {
           this.store.movies = resp.data.results;
         });
-      this.store.searchQuery = "";
+    },
+    searchSeries() {
+      this.store.series = [];
+      axios
+        .get("https://api.themoviedb.org/3/search/tv", {
+          params: {
+            api_key: "e02ccfdaadf1d52eb482ac6f985a52cd",
+            language: "it-IT",
+            query: this.store.searchQuery,
+          },
+        })
+        .then((resp) => {
+          this.store.series = resp.data.results;
+        });
     },
     search() {
       this.searchMovies();
-    },
-    logga() {
-      console.log(this.store.movies);
+      this.searchSeries();
+      this.store.searchQuery = "";
     },
   },
 };
@@ -43,7 +56,7 @@ export default {
   <header>
     <PageHeader @searchFor="search" />
   </header>
-  <main @click="logga">
+  <main>
     <PageMain />
   </main>
 </template>
